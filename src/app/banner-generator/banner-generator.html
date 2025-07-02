@@ -16,28 +16,18 @@
             <div class="control-group">
                 <h3>Choose a Template</h3>
                 <div class="template-grid">
-                    <div class="template-item active" data-template="professional-blue"
-                        (click)="selectTemplate('professional-blue')">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3c719f58-1e9c-4233-ab4b-34ee47dafc6c.png" alt="Blue gradient background" class="template-preview">
-                    </div>
-                    <div class="template-item" data-template="modern-purple" (click)="selectTemplate('modern-purple')">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9352c8a6-80f4-4a7d-8c19-6dbc0d8beb52.png" alt="Modern purple geometric design"
-                            class="template-preview">
-                    </div>
-                    <div class="template-item" data-template="tech-dark" (click)="selectTemplate('tech-dark')">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/503c4b68-0911-47d6-8031-674ed863d047.png" alt="Dark background with circuit pattern"
-                            class="template-preview">
-                    </div>
-                    <div class="template-item" data-template="light-minimal" (click)="selectTemplate('light-minimal')">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a9eca9c8-fd0b-4299-af13-d7b4e7ba95de.png" alt="Clean white background" class="template-preview">
-                    </div>
-                    <div class="template-item" data-template="creative-mesh" (click)="selectTemplate('creative-mesh')">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b77ab753-8c25-4eb9-96bb-114d25fd9f72.png" alt="Gradient mesh in vibrant colors"
-                            class="template-preview">
-                    </div>
-                    <div class="template-item" data-template="custom" (click)="selectTemplate('custom')">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4c581b68-1b0e-43ed-9af2-8b97c350c372.png" alt="Custom color background" class="template-preview">
-                    </div>
+                <div
+                    *ngFor="let template of templateList"
+                    class="template-item"
+                    [class.active]="activeTemplate === template.key"
+                    (click)="selectTemplate(template.key)"
+                >
+                    <img
+                    [src]="template.image"
+                    [alt]="template.alt"
+                    class="template-preview"
+                    />
+                </div>
                 </div>
             </div>
 
@@ -52,15 +42,14 @@
 
             <div class="control-group">
                 <label for="subheadingText">Subheading</label>
-                <input type="text" id="subheadingText" [(ngModel)]="subheadingText"
-                    placeholder="Enter your professional title or tagline">
+                <input type="text" id="subheadingText" [(ngModel)]="subheadingText" placeholder="Enter your professional title or tagline">
             </div>
 
             <div class="control-group">
                 <label>Content Layout</label>
                 <div class="layout-options">
-                    <div class="layout-option" [class.active]="layout === 'center'" (click)="selectLayout('center')">Center</div>
                     <div class="layout-option" [class.active]="layout === 'left'" (click)="selectLayout('left')">Left</div>
+                    <div class="layout-option" [class.active]="layout === 'center'" (click)="selectLayout('center')">Center</div>
                     <div class="layout-option" [class.active]="layout === 'right'" (click)="selectLayout('right')">Right</div>
                 </div>
             </div>
@@ -75,7 +64,7 @@
                 <input type="color" id="subheadingColor" [(ngModel)]="subheadingColor">
             </div>
 
-            <div class="control-group" id="customBgGroup">
+            <div *ngIf="isCustom" class="control-group" id="customBgGroup">
                 <label for="backgroundColor">Background Color</label>
                 <input type="color" id="backgroundColor" [(ngModel)]="backgroundColor">
             </div>

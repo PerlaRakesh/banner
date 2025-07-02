@@ -191,8 +191,7 @@ button:hover {
     margin-bottom: 15px;
 }
 
-.layout-option:hover,
-.layout-option.active {
+.layout-option:hover,.layout-option.active {
     background-color: var(--primary-color);
     color: white;
     border-color: var(--primary-color);
