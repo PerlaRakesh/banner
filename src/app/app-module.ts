@@ -2,18 +2,20 @@ import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
-import { BannerGenerator } from './banner-generator/banner-generator';
+import { BannerGeneratorComponent } from './banner-generator/banner-generator';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     App,
-    BannerGenerator
+    BannerGeneratorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot([])
   ],
   providers: [
     provideBrowserGlobalErrorListeners()
