@@ -18,7 +18,8 @@ export class BannerGeneratorComponent {
   headingColor: string = '#ffffff';
   subheadingColor: string = '#ffffff';
   backgroundColor: string = '#0077B5';
-  selectedTemplate: string = 'professional-blue';
+  layout: string = 'center';
+  activeTemplate: string = 'professional-blue';
 
   templates: { [key: string]: Template } = {
     'professional-blue': {
@@ -53,11 +54,39 @@ export class BannerGeneratorComponent {
     }
   };
 
+  selectTemplate(templateName: string) {
+    this.activeTemplate = templateName;
+    this.updateBanner();
+  }
+
+  selectLayout(layout: string) {
+    this.layout = layout;
+    this.updateBanner(); // Call updateBanner to apply layout changes
+  }
+
   updateBanner() {
-    const template = this.templates[this.selectedTemplate];
-    this.headingColor = template.headingColor;
-    this.subheadingColor = template.subheadingColor;
-    this.backgroundColor = this.selectedTemplate === 'custom' ? this.backgroundColor : template.background;
+    const bannerCanvas = document.getElementById('bannerCanvas') as HTMLElement;
+    const bannerHeading = document.getElementById('bannerHeading') as HTMLElement;
+    const bannerSubheading = document.getElementById('bannerSubheading') as HTMLElement;
+
+    const template = this.templates[this.activeTemplate];
+    
+    bannerHeading.style.color = this.headingColor;
+    bannerSubheading.style.color = this.subheadingColor;
+
+    // Apply background based on template
+    if (this.activeTemplate === 'custom') {
+        bannerCanvas.style.background = this.backgroundColor; // Use custom background color
+    } else {
+        bannerCanvas.style.background = template.background; // Use template background
+    }
+
+    bannerHeading.textContent = this.headingText;
+    bannerSubheading.textContent = this.subheadingText;
+
+    bannerCanvas.style.height = `${bannerCanvas.offsetWidth * (396 / 1584)}px`;
+
+    console.log(bannerCanvas);
   }
 
   downloadBanner() {

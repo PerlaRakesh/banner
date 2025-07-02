@@ -1,31 +1,86 @@
 <div class="container">
-  <h1>Professional LinkedIn Banner Generator</h1>
-  <div class="banner-preview" [ngStyle]="{'background': backgroundColor}">
-    <h1 [ngStyle]="{'color': headingColor}">{{ headingText }}</h1>
-    <p [ngStyle]="{'color': subheadingColor}">{{ subheadingText }}</p>
-  </div>
+    <header>
+        <h1>Professional LinkedIn Banner Generator</h1>
+        <p>Create a perfect LinkedIn cover image that represents your professional brand</p>
+    </header>
 
-  <div>
-    <h3>Choose a Template</h3>
-    <select [(ngModel)]="selectedTemplate" (change)="updateBanner()">
-      <option *ngFor="let template of (templates | keyvalue)" [value]="template.key">{{ template.key }}</option>
-    </select>
-  </div>
+    <div class="generator-container">
+        <div class="preview-container">
+            <div class="banner-preview" id="bannerCanvas">
+                <div class="banner-content" id="bannerContent">
+                    <h1 class="banner-heading" id="bannerHeading">YOUR NAME</h1>
+                    <p class="banner-subheading" id="bannerSubheading">Professional Title | Key Expertise</p>
+                </div>
+            </div>
 
-  <div>
-    <label>Your Name/Heading</label>
-    <input type="text" [(ngModel)]="headingText" (input)="updateBanner()">
-  </div>
+            <div class="control-group">
+                <h3>Choose a Template</h3>
+                <div class="template-grid">
+                    <div class="template-item active" data-template="professional-blue"
+                        (click)="selectTemplate('professional-blue')">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3c719f58-1e9c-4233-ab4b-34ee47dafc6c.png" alt="Blue gradient background" class="template-preview">
+                    </div>
+                    <div class="template-item" data-template="modern-purple" (click)="selectTemplate('modern-purple')">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9352c8a6-80f4-4a7d-8c19-6dbc0d8beb52.png" alt="Modern purple geometric design"
+                            class="template-preview">
+                    </div>
+                    <div class="template-item" data-template="tech-dark" (click)="selectTemplate('tech-dark')">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/503c4b68-0911-47d6-8031-674ed863d047.png" alt="Dark background with circuit pattern"
+                            class="template-preview">
+                    </div>
+                    <div class="template-item" data-template="light-minimal" (click)="selectTemplate('light-minimal')">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a9eca9c8-fd0b-4299-af13-d7b4e7ba95de.png" alt="Clean white background" class="template-preview">
+                    </div>
+                    <div class="template-item" data-template="creative-mesh" (click)="selectTemplate('creative-mesh')">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b77ab753-8c25-4eb9-96bb-114d25fd9f72.png" alt="Gradient mesh in vibrant colors"
+                            class="template-preview">
+                    </div>
+                    <div class="template-item" data-template="custom" (click)="selectTemplate('custom')">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4c581b68-1b0e-43ed-9af2-8b97c350c372.png" alt="Custom color background" class="template-preview">
+                    </div>
+                </div>
+            </div>
 
-  <div>
-    <label>Subheading</label>
-    <input type="text" [(ngModel)]="subheadingText" (input)="updateBanner()">
-  </div>
+            <button class="download-btn" id="downloadBtn" (click)="downloadBanner()">Download Your Banner</button>
+        </div>
 
-  <div>
-    <label>Background Color</label>
-    <input type="color" [(ngModel)]="backgroundColor" (input)="updateBanner()">
-  </div>
+        <div class="controls">
+            <div class="control-group">
+                <label for="headingText">Your Name/Heading</label>
+                <input type="text" id="headingText" [(ngModel)]="headingText" placeholder="Enter your name or heading">
+            </div>
 
-  <button (click)="downloadBanner()">Download Your Banner</button>
+            <div class="control-group">
+                <label for="subheadingText">Subheading</label>
+                <input type="text" id="subheadingText" [(ngModel)]="subheadingText"
+                    placeholder="Enter your professional title or tagline">
+            </div>
+
+            <div class="control-group">
+                <label>Content Layout</label>
+                <div class="layout-options">
+                    <div class="layout-option" [class.active]="layout === 'center'" (click)="selectLayout('center')">Center</div>
+                    <div class="layout-option" [class.active]="layout === 'left'" (click)="selectLayout('left')">Left</div>
+                    <div class="layout-option" [class.active]="layout === 'right'" (click)="selectLayout('right')">Right</div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="headingColor">Heading Color</label>
+                <input type="color" id="headingColor" [(ngModel)]="headingColor">
+            </div>
+
+            <div class="control-group">
+                <label for="subheadingColor">Subheading Color</label>
+                <input type="color" id="subheadingColor" [(ngModel)]="subheadingColor">
+            </div>
+
+            <div class="control-group" id="customBgGroup">
+                <label for="backgroundColor">Background Color</label>
+                <input type="color" id="backgroundColor" [(ngModel)]="backgroundColor">
+            </div>
+
+            <button class="generate-btn" id="generateBtn" (click)="updateBanner()">Update Banner</button>
+        </div>
+    </div>
 </div>
