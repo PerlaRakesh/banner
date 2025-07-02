@@ -1,1 +1,31 @@
-<p>banner-generator works!</p>
+<div class="container">
+  <h1>Professional LinkedIn Banner Generator</h1>
+  <div class="banner-preview" [ngStyle]="{'background': backgroundColor}">
+    <h1 [ngStyle]="{'color': headingColor}">{{ headingText }}</h1>
+    <p [ngStyle]="{'color': subheadingColor}">{{ subheadingText }}</p>
+  </div>
+
+  <div>
+    <h3>Choose a Template</h3>
+    <select [(ngModel)]="selectedTemplate" (change)="updateBanner()">
+      <option *ngFor="let template of (templates | keyvalue)" [value]="template.key">{{ template.key }}</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Your Name/Heading</label>
+    <input type="text" [(ngModel)]="headingText" (input)="updateBanner()">
+  </div>
+
+  <div>
+    <label>Subheading</label>
+    <input type="text" [(ngModel)]="subheadingText" (input)="updateBanner()">
+  </div>
+
+  <div>
+    <label>Background Color</label>
+    <input type="color" [(ngModel)]="backgroundColor" (input)="updateBanner()">
+  </div>
+
+  <button (click)="downloadBanner()">Download Your Banner</button>
+</div>

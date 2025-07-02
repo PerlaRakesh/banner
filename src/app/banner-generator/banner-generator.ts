@@ -10,7 +10,7 @@ interface Template {
   selector: 'app-banner-generator',
   standalone: false,
   templateUrl: './banner-generator.html',
-  styleUrl: './banner-generator.css'
+  styleUrls: ['./banner-generator.css']
 })
 export class BannerGeneratorComponent {
   headingText: string = 'YOUR NAME';
@@ -58,5 +58,35 @@ export class BannerGeneratorComponent {
     this.headingColor = template.headingColor;
     this.subheadingColor = template.subheadingColor;
     this.backgroundColor = this.selectedTemplate === 'custom' ? this.backgroundColor : template.background;
+  }
+
+  downloadBanner() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Check if ctx is null
+    if (!ctx) {
+      console.error('Failed to get canvas context');
+      return; // Exit the function if ctx is null
+    }
+
+    canvas.width = 1584;
+    canvas.height = 396;
+
+    // Fill the canvas with the background color
+    ctx.fillStyle = this.backgroundColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = this.headingColor;
+    ctx.font = 'bold 48px Arial';
+    ctx.fillText(this.headingText, 50, 100);
+    ctx.fillStyle = this.subheadingColor;
+    ctx.font = '24px Arial';
+    ctx.fillText(this.subheadingText, 50, 150);
+
+    const link = document.createElement('a');
+    link.download = 'linkedin-banner.png';
+    link.href = canvas.toDataURL();
+    link.click();
   }
 }
