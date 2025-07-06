@@ -37,12 +37,12 @@
         <div class="controls">
             <div class="control-group">
                 <label for="headingText">Your Name/Heading</label>
-                <input type="text" id="headingText" [(ngModel)]="headingText" placeholder="Enter your name or heading">
+                <input type="text" id="headingText" (change)="updateBanner()" [(ngModel)]="headingText" placeholder="Enter your name or heading">
             </div>
 
             <div class="control-group">
                 <label for="subheadingText">Subheading</label>
-                <input type="text" id="subheadingText" [(ngModel)]="subheadingText" placeholder="Enter your professional title or tagline">
+                <input type="text" id="subheadingText" (change)="updateBanner()" [(ngModel)]="subheadingText" placeholder="Enter your professional title or tagline">
             </div>
 
             <div class="control-group">
